@@ -86,26 +86,31 @@ export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Monitor className="w-6 h-6 text-white" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary via-primary-light to-accent flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+              <Monitor className="w-7 h-7 text-white" />
             </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">
-              PACS/RIS/HIS
-            </span>
+            <div className="hidden sm:block">
+              <span className="text-xl font-bold gradient-text block">
+                PACS · RIS · HIS
+              </span>
+              <span className="text-xs text-text-tertiary">
+                Documentação Técnica
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-1">
+          <div className="hidden lg:flex lg:items-center lg:gap-2">
             <Link
               href="/"
-              className="px-4 py-2 text-sm font-medium text-text-secondary hover:text-text transition-colors rounded-lg hover:bg-surface"
+              className="px-4 py-2.5 text-sm font-semibold text-text-secondary hover:text-text transition-all rounded-xl hover:bg-surface-elevated"
             >
-              <Home className="w-4 h-4 inline-block mr-1" />
+              <Home className="w-4 h-4 inline-block mr-2" />
               Home
             </Link>
             {navigation.map((item) => (
@@ -117,10 +122,10 @@ export function Header() {
               >
                 <button
                   className={cn(
-                    "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all",
                     activeMenu === item.name
-                      ? "text-text bg-surface"
-                      : "text-text-secondary hover:text-text hover:bg-surface"
+                      ? "text-text bg-surface-elevated shadow-lg"
+                      : "text-text-secondary hover:text-text hover:bg-surface-elevated"
                   )}
                 >
                   <item.icon className="w-4 h-4" />
@@ -139,29 +144,31 @@ export function Header() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute left-0 top-full pt-2"
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 top-full pt-3"
                     >
-                      <div className="w-72 rounded-xl bg-surface border border-border shadow-xl overflow-hidden">
-                        <div className="p-2">
+                      <div className="w-80 rounded-2xl bg-surface-elevated border-2 border-border-light shadow-2xl overflow-hidden">
+                        <div className="p-3">
                           {item.children?.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-hover transition-colors group"
+                              className="flex items-start gap-3 p-3 rounded-xl hover:bg-surface-hover transition-all group"
                             >
                               {"icon" in child && child.icon ? (
-                                <child.icon className="w-5 h-5 text-primary mt-0.5" />
+                                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                  <child.icon className="w-5 h-5 text-primary" />
+                                </div>
                               ) : (
-                                <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center mt-0.5">
+                                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                                   <div className="w-2 h-2 rounded-full bg-primary" />
                                 </div>
                               )}
-                              <div>
-                                <div className="text-sm font-medium text-text group-hover:text-primary transition-colors">
+                              <div className="flex-1">
+                                <div className="text-sm font-semibold text-text group-hover:text-primary transition-colors">
                                   {child.name}
                                 </div>
-                                <div className="text-xs text-muted">
+                                <div className="text-xs text-text-tertiary mt-1">
                                   {child.description}
                                 </div>
                               </div>

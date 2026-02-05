@@ -36,14 +36,16 @@ const quickLinks = [
     description: "Armazenamento e visualização de imagens médicas DICOM",
     href: "/pacs",
     icon: Monitor,
-    color: "from-primary to-indigo-400",
+    color: "from-primary to-primary-light",
+    gradient: "bg-primary/5",
   },
   {
     title: "RIS",
     description: "Worklist, laudos, filtros e gestão de exames",
     href: "/ris",
     icon: FileText,
-    color: "from-accent to-cyan-400",
+    color: "from-accent to-accent-light",
+    gradient: "bg-accent/5",
   },
   {
     title: "Mini HIS",
@@ -51,27 +53,31 @@ const quickLinks = [
     href: "/his",
     icon: Building2,
     color: "from-success to-green-400",
+    gradient: "bg-success/5",
   },
   {
     title: "Inteligência Artificial",
     description: "8 funcionalidades de IA para produtividade",
     href: "/inteligencia-artificial",
     icon: Brain,
-    color: "from-purple-500 to-pink-400",
+    color: "from-primary-light to-accent",
+    gradient: "bg-primary-light/5",
   },
   {
     title: "Arquitetura",
     description: "Modelo híbrido local + nuvem",
     href: "/arquitetura",
     icon: Server,
-    color: "from-orange-500 to-amber-400",
+    color: "from-accent to-success",
+    gradient: "bg-accent/5",
   },
   {
     title: "Segurança",
     description: "RBAC, auditoria, HIPAA e LGPD",
     href: "/seguranca",
     icon: Shield,
-    color: "from-red-500 to-rose-400",
+    color: "from-error to-warning",
+    gradient: "bg-error/5",
   },
 ];
 
@@ -94,24 +100,24 @@ export default function HomePage() {
         <Hero />
 
         {/* Stats Section */}
-        <section className="py-20 border-t border-border">
+        <section className="py-24 border-t border-border/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold text-text mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-text mb-6">
                 Plataforma Completa em Números
               </h2>
-              <p className="text-muted max-w-2xl mx-auto">
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
                 Mais de 3.000 linhas de especificações funcionais consolidadas
-                em uma documentação técnica abrangente.
+                em uma documentação técnica abrangente
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {stats.map((stat, index) => (
                 <StatCounter
                   key={index}
@@ -125,55 +131,58 @@ export default function HomePage() {
         </section>
 
         {/* Quick Links Section */}
-        <section className="py-20 bg-surface/50">
+        <section className="py-24 bg-gradient-to-b from-surface/30 to-transparent">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 mb-6">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">
+                <span className="text-sm font-semibold text-primary">
                   Navegação Rápida
                 </span>
               </div>
-              <h2 className="text-3xl font-bold text-text mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-text mb-6">
                 Explore a Documentação
               </h2>
-              <p className="text-muted max-w-2xl mx-auto">
+              <p className="text-lg text-text-secondary max-w-3xl mx-auto">
                 Acesse rapidamente qualquer seção da documentação técnica da
-                plataforma.
+                plataforma
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {quickLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                 >
                   <Link
                     href={link.href}
-                    className="group block p-6 bg-surface rounded-xl border border-border hover:border-primary/50 transition-all hover:-translate-y-1"
+                    className={`group relative block p-8 bg-surface/90 backdrop-blur-xl rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 card-shadow hover:card-shadow-lg overflow-hidden`}
                   >
-                    <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${link.color} flex items-center justify-center mb-4`}
-                    >
-                      <link.icon className="w-6 h-6 text-white" />
+                    <div className={`absolute inset-0 ${link.gradient} opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl`} />
+                    <div className="relative">
+                      <div
+                        className={`w-16 h-16 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}
+                      >
+                        <link.icon className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-text mb-3 group-hover:text-primary transition-colors">
+                        {link.title}
+                      </h3>
+                      <p className="text-text-secondary leading-relaxed mb-6">{link.description}</p>
+                      <span className="inline-flex items-center text-sm text-primary font-semibold">
+                        Ver documentação
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </span>
                     </div>
-                    <h3 className="text-xl font-semibold text-text mb-2 group-hover:text-primary transition-colors">
-                      {link.title}
-                    </h3>
-                    <p className="text-sm text-muted mb-4">{link.description}</p>
-                    <span className="inline-flex items-center text-sm text-primary font-medium">
-                      Ver documentação
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </span>
                   </Link>
                 </motion.div>
               ))}
@@ -182,23 +191,23 @@ export default function HomePage() {
         </section>
 
         {/* Additional Sections */}
-        <section className="py-20 border-t border-border">
+        <section className="py-24 border-t border-border/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold text-text mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-text mb-6">
                 Documentação Adicional
               </h2>
-              <p className="text-muted max-w-2xl mx-auto">
-                Mais recursos e informações sobre a plataforma.
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+                Mais recursos e informações sobre a plataforma
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {additionalSections.map((section, index) => (
                 <motion.div
                   key={section.href}
@@ -209,10 +218,12 @@ export default function HomePage() {
                 >
                   <Link
                     href={section.href}
-                    className="flex flex-col items-center p-4 bg-surface rounded-lg border border-border hover:border-primary/50 hover:bg-surface-hover transition-all group"
+                    className="flex flex-col items-center p-6 bg-surface/80 backdrop-blur rounded-xl border-2 border-border hover:border-primary/50 hover:bg-surface-elevated transition-all duration-300 group card-shadow hover:card-shadow-lg hover:-translate-y-1"
                   >
-                    <section.icon className="w-8 h-8 text-muted group-hover:text-primary transition-colors mb-2" />
-                    <span className="text-sm font-medium text-text-secondary group-hover:text-text text-center">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <section.icon className="w-7 h-7 text-primary group-hover:scale-110 transition-transform" />
+                    </div>
+                    <span className="text-sm font-semibold text-text-secondary group-hover:text-text text-center leading-tight">
                       {section.title}
                     </span>
                   </Link>
@@ -223,32 +234,32 @@ export default function HomePage() {
         </section>
 
         {/* Architecture Preview */}
-        <section className="py-20 bg-surface/50">
+        <section className="py-24 bg-gradient-to-b from-transparent to-surface/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold text-text mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-text mb-6">
                 Arquitetura Híbrida
               </h2>
-              <p className="text-muted max-w-2xl mx-auto">
+              <p className="text-lg text-text-secondary max-w-3xl mx-auto">
                 Modelo inovador que combina processamento local com
-                armazenamento em nuvem para máxima disponibilidade.
+                armazenamento em nuvem para máxima disponibilidade e performance
               </p>
             </motion.div>
 
-            <div className="bg-surface rounded-xl border border-border p-8">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center">
+            <div className="bg-surface-elevated rounded-2xl border-2 border-border-light p-10 card-shadow-lg">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 text-center">
                 {[
-                  { label: "Equipamento DICOM", icon: Monitor },
-                  { label: "Broker Local", icon: Server },
-                  { label: "Cache", icon: Shield },
-                  { label: "Sincronização", icon: Plug },
-                  { label: "Nuvem", icon: Server },
-                  { label: "Viewer Web", icon: Monitor },
+                  { label: "Equipamento DICOM", icon: Monitor, color: "primary" },
+                  { label: "Broker Local", icon: Server, color: "primary-light" },
+                  { label: "Cache", icon: Shield, color: "accent" },
+                  { label: "Sincronização", icon: Plug, color: "accent-light" },
+                  { label: "Nuvem", icon: Server, color: "success" },
+                  { label: "Viewer Web", icon: Monitor, color: "primary" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -256,25 +267,27 @@ export default function HomePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center relative"
                   >
-                    <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-2">
-                      <item.icon className="w-8 h-8 text-primary" />
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-3 backdrop-blur border border-primary/20">
+                      <item.icon className="w-10 h-10 text-primary" />
                     </div>
-                    <span className="text-sm text-muted">{item.label}</span>
+                    <span className="text-sm font-semibold text-text-secondary">{item.label}</span>
                     {index < 5 && (
-                      <ArrowRight className="w-6 h-6 text-muted mt-4 hidden md:block rotate-0 md:rotate-0" />
+                      <div className="absolute -right-4 top-1/3 hidden md:block">
+                        <ArrowRight className="w-6 h-6 text-primary/50" />
+                      </div>
                     )}
                   </motion.div>
                 ))}
               </div>
-              <div className="mt-8 text-center">
+              <div className="mt-12 text-center">
                 <Link
                   href="/arquitetura"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-white font-medium rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-hover text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-primary/50 hover:-translate-y-0.5"
                 >
                   Ver Arquitetura Completa
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>

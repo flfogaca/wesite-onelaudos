@@ -55,14 +55,14 @@ export function StatCounter({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={cn("text-center", className)}
+      className={cn("text-center p-6 bg-surface/80 backdrop-blur rounded-2xl border-2 border-border hover:border-primary/30 transition-all card-shadow", className)}
     >
-      <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
+      <div className="text-5xl md:text-6xl font-extrabold gradient-text mb-3">
         {prefix}
         {displayValue}
         {suffix}
       </div>
-      <div className="text-sm text-muted">{label}</div>
+      <div className="text-sm font-medium text-text-secondary">{label}</div>
     </motion.div>
   );
 }
